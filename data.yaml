@@ -1,0 +1,6 @@
+train: train/images
+val: train/images
+
+names:
+  0: helmet
+  1: no_helmet
