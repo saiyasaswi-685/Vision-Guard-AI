@@ -47,7 +47,7 @@ class S3Uploader:
         )
 
         file_url = (
-            f"https://{self.bucket_name}.s3.us-east-1.amazonaws.com/{file_path.name}"
+            f"https://{self.bucket_name}.s3.amazonaws.com/{file_path.name}"
         )
 
         self.log_s3_upload(
