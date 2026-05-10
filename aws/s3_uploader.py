@@ -1,6 +1,6 @@
 import boto3
-import csv
 import os
+import csv
 
 from pathlib import Path
 from datetime import datetime
@@ -30,28 +30,34 @@ class S3Uploader:
             region_name="us-east-1"
         )
 
-    def upload_file(self, file_path):
+    def upload_file(
+        self,
+        file_path
+    ):
 
         file_path = Path(file_path)
 
         self.s3.upload_file(
             str(file_path),
             self.bucket_name,
-            file_path.name
+            file_path.name,
+            ExtraArgs={
+                "ContentType": "image/jpeg"
+            }
         )
 
         file_url = (
             f"https://{self.bucket_name}.s3.us-east-1.amazonaws.com/{file_path.name}"
         )
 
-        self.save_log(
+        self.log_s3_upload(
             file_path.name,
             file_url
         )
 
         return file_url
 
-    def save_log(
+    def log_s3_upload(
         self,
         image_name,
         s3_url
