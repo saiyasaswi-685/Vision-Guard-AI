@@ -1,3 +1,4 @@
+
 import boto3
 import os
 import csv
@@ -17,7 +18,9 @@ class S3Uploader:
 
     def __init__(self):
 
-        self.bucket_name = "helmet-alert-images"
+        self.bucket_name = os.getenv(
+            "AWS_BUCKET_NAME"
+        )
 
         self.s3 = boto3.client(
             "s3",
@@ -27,7 +30,9 @@ class S3Uploader:
             aws_secret_access_key=os.getenv(
                 "AWS_SECRET_KEY"
             ),
-            region_name="us-east-1"
+            region_name=os.getenv(
+                "AWS_REGION"
+            )
         )
 
     def upload_file(
@@ -89,3 +94,4 @@ class S3Uploader:
                 image_name,
                 s3_url
             ])
+
