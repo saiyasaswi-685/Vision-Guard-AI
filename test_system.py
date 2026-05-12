@@ -1,4 +1,5 @@
 from pathlib import Path
+from aws.s3_uploader import S3Uploader
 
 
 def test_captured_alerts_folder():
@@ -17,3 +18,10 @@ def test_log_file_creation():
     )
 
     assert log_file.exists()
+
+
+def test_s3_uploader_creation():
+
+    uploader = S3Uploader()
+
+    assert uploader is not None
